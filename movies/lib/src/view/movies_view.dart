@@ -3,17 +3,18 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movies/movies.dart';
 import 'package:movies/src/bloc/bloc_result.dart';
 import 'package:movies/src/model/movie_model.dart';
-import 'package:movies/src/utils/dimens.dart';
-import 'package:movies/src/view/movie_detail_view.dart';
+import 'package:movies/src/widget/movie_card_widget.dart';
 
-class MovieDetails extends StatefulWidget {
-  const MovieDetails({super.key});
+import '../utils/dimens.dart';
+
+class MoviesView extends StatefulWidget {
+  const MoviesView({super.key});
 
   @override
-  State<MovieDetails> createState() => _MovieDetailsState();
+  State<MoviesView> createState() => _MoviesViewState();
 }
 
-class _MovieDetailsState extends State<MovieDetails> {
+class _MoviesViewState extends State<MoviesView> {
   @override
   void initState() {
     super.initState();
@@ -21,7 +22,7 @@ class _MovieDetailsState extends State<MovieDetails> {
       var state = States.values.firstWhere((st) => st.state == call.method);
       switch (state) {
         case States.load:
-          context.read<MoviesBloc>().loadMovie(arguments: call.arguments);
+          context.read<MoviesBloc>().getMovieList(arguments: call.arguments);
           break;
       }
     });
@@ -31,8 +32,8 @@ class _MovieDetailsState extends State<MovieDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Material(
-        child: StreamBuilder<BlocResult<MovieModel>>(
-            stream: context.read<MoviesBloc>().movieStream,
+        child: StreamBuilder<BlocResult<List<MovieModel>>>(
+            stream: context.read<MoviesBloc>().movieListStream,
             builder: (context, snapshot) {
               if (snapshot.data == null || snapshot.data is Loading) {
                 return const Scaffold(
@@ -50,18 +51,18 @@ class _MovieDetailsState extends State<MovieDetails> {
                 );
               }
 
-              var movie = (snapshot.data as Success<MovieModel>).data;
-              return MovieDetailView(movie: movie);
+              var movies = (snapshot.data as Success<List<MovieModel>>).data;
+              return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.55,
+                  ),
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) {
+                    return MovieCardWidget(movie: movies[index]);
+                  });
             }),
       ),
     );
   }
-}
-
-enum States {
-  load('loadState');
-
-  const States(this.state);
-
-  final String state;
 }

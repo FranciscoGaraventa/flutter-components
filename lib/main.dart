@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Flutter Movies',
         home: Scaffold(
           drawer: MovieDrawer() ,
-          body: MovieDetails(),
+          body: MoviesView(),
         ),
       ),
     );

@@ -5,19 +5,19 @@ import 'genre_model.dart';
 
 class MovieModel {
   MovieModel({
-    required this.adult,
-    required this.backdropPath,
-    required this.genres,
-    required this.cast,
+    this.adult = false,
+    this.backdropPath = '',
+    this.genres = const <GenreModel>[],
+    this.cast = const <CastModel>[],
     required this.id,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
+    this.originalLanguage = '',
+    this.originalTitle = '',
+    this.overview = '',
+    this.popularity = 0.0,
+    this.posterPath = '',
     required this.releaseDate,
     required this.title,
-    required this.video,
+    this.video = false,
     required this.voteAverage,
     required this.voteCount,
   });
@@ -40,7 +40,16 @@ class MovieModel {
         releaseDate: json['release_date'],
         title: json['title'],
         video: json['video'],
-        voteAverage: json['vote_average'].toString(),
+        voteAverage: json['vote_average'],
+        voteCount: json['vote_count'],
+      );
+
+  factory MovieModel.movieCardFromJson(Map<String, dynamic> json) => MovieModel(
+        id: json['id'],
+        releaseDate: json['release_date'],
+        posterPath: json['poster_path'],
+        title: json['title'],
+        voteAverage: json['vote_average'],
         voteCount: json['vote_count'],
       );
 

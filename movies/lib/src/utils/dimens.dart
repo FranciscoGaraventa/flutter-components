@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 abstract class CustomPadding {
   static const paddingXSmall = 4.0;
   static const paddingSmall = 8.0;
@@ -28,3 +30,5 @@ abstract class CustomBorderRadius {
   static const borderRadiusLarge = 20.0;
   static const borderRadiusXLarge = 24.0;
 }
+
+const methodChannel = MethodChannel('com.globant.movies.channel');
