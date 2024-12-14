@@ -27,28 +27,16 @@ class _MovieDrawerState extends State<MovieDrawer> {
         children: <Widget>[
           ListTile(
               leading: const Icon(Icons.add_sharp),
-              title: const Text('SUCCESS EVENT'),
+              title: const Text('MOVIE DETAIL'),
               onTap: () {
                 moviesBloc.loadMovie(arguments: <String, dynamic>{
                   'adult': false,
                   'backdrop_path': '/tElnmtQ6yz1PjN1kePNl8yMSb59.jpg',
                   'genres': [
-                    {
-                      'id': 16,
-                      'name': 'Animation'
-                    },
-                    {
-                      'id': 12,
-                      'name': 'Adventure'
-                    },
-                    {
-                      'id': 10751,
-                      'name': 'Family'
-                    },
-                    {
-                      'id': 35,
-                      'name': 'Comedy'
-                    }
+                    {'id': 16, 'name': 'Animation'},
+                    {'id': 12, 'name': 'Adventure'},
+                    {'id': 10751, 'name': 'Family'},
+                    {'id': 35, 'name': 'Comedy'}
                   ],
                   'cast': [
                     {
@@ -149,6 +137,71 @@ class _MovieDrawerState extends State<MovieDrawer> {
                   'vote_average': 7.2,
                   'vote_count': 72
                 });
+                Navigator.of(context).pop();
+              }),
+          ListTile(
+              leading: const Icon(Icons.add_sharp),
+              title: const Text('MOVIE LIST'),
+              onTap: () {
+                moviesBloc.getMovieList(arguments: '''[
+                    {
+                      "id": 912649,
+                      "poster_path": "/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+                      "title": "Venom: The Last Dance",
+                      "release_date": "2024-10-22",
+                      "vote_average": "6.751",
+                      "vote_count": 1428
+                    },
+                    {
+                      "id": 1241982,
+                      "poster_path": "/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
+                      "title": "Moana 2",
+                      "release_date": "2024-11-21",
+                      "vote_average": "6.9",
+                      "vote_count": 481
+                    },
+                    {
+                      "id": 1035048,
+                      "poster_path": "/uQhYBxOVFU6s9agD49FnGHwJqG5.jpg",
+                      "title": "Elevation",
+                      "release_date": "2024-11-07",
+                      "vote_average": "6.5",
+                      "vote_count": 151
+                    },
+                    {
+                      "id": 974453,
+                      "poster_path": "/cNtAslrDhk1i3IOZ16vF7df6lMy.jpg",
+                      "title": "Absolution",
+                      "release_date": "2024-10-31",
+                      "vote_average": "6.1",
+                      "vote_count": 131
+                    },
+                    {
+                      "id": 845781,
+                      "poster_path": "/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
+                      "title": "Red One",
+                      "release_date": "2024-10-31",
+                      "vote_average": "6.983",
+                      "vote_count": 444
+                    },
+                    {
+                      "id": 1182387,
+                      "poster_path": "/pnXLFioDeftqjlCVlRmXvIdMsdP.jpg",
+                      "title": "Armor",
+                      "release_date": "2024-10-30",
+                      "vote_average": "5.5",
+                      "vote_count": 65
+                    },
+                    {
+                      "id": 1147416,
+                      "poster_path": "/6AtoMpHvs9pxd30KsyK8QmJ9W9M.jpg",
+                      "title": "Miraculous World, London: At the Edge of Time",
+                      "release_date": "2024-11-14",
+                      "vote_average": "8.5",
+                      "vote_count": 44
+                    }
+                  ]'''
+                );
                 Navigator.of(context).pop();
               }),
         ],
