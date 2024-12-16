@@ -1,16 +1,83 @@
-# flutter_components
+# flutter-components
 
-A new Flutter project.
+## Table of Contents
+- [About](#about)
+- [Dependencies](#dependencies)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Code Contribution](#code-contribution)
+- [Widget](#widget)
+- [Sample](#sample-data)
 
-## Getting Started
+## About
 
-This project is a starting point for a Flutter application.
+**flutter-components** is a library that contains the components that is going to be managed by native libraries.
 
-A few resources to get you started if this is your first Flutter project:
+## Dependencies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Requirements
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Fvm
+- Visual Studio Code or Android Studio
+
+## Installation
+
+In order to compile the component move to the ```lib``` folder then run ```fvm flutter pub get``` once the compilation process
+finished you can run the example app.
+
+## Code Contribution
+
+- Define the component to test
+
+On ```main.dart``` file every you should have to define the component that is going to manage the specific widget/screen to the specific
+library, to do that you need to replace on the body, the widget that is going to be used, this is the list of current widgets available:
+- MoviesView
+- MovieDetailsView
+
+```
+Widget build(BuildContext context) {
+    return ModularApp(
+      module: MoviesModule(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Movies',
+        home: Scaffold(
+          drawer: MovieDrawer() ,
+          body: /** WIDGET **/,
+        ),
+      ),
+    );
+  }
+```
+
+- Test the component
+
+The ```drawer``` widget (MovieDrawer) managed all the events to show the specific widget/screen. Every tile has a title and an action.
+The title correspond to the widget name and the action call the bloc event required.
+
+## Widget
+
+To add a new widget, it is necessary to perform the following steps, first we need to define its name, once this is defined, we proceed to add it to the library export ```movies.dart```, 
+this will allow us to use it in the module.
+
+Each new widget must have the following configured within its initState
+
+```
+@override
+  void initState() {
+    super.initState();
+    methodChannel.setMethodCallHandler((call) async {
+      var state = States.values.firstWhere((st) => st.state == call.method);
+      switch (state) {
+        //Configure the state to call a bloc method.
+      }
+    });
+  }
+```
+
+This will allow us to make a call to the bloc that we have defined and be able to display information within the widget.
+
+## Sample Data
+
+Inside the assets folder, there is the sample folder, which contains three ```.json``` files, which correspond to mocked data to be used for 
+movies, genres and cast from each movie.
