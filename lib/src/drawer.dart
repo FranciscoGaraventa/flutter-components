@@ -134,7 +134,7 @@ class _MovieDrawerState extends State<MovieDrawer> {
                   'release_date': '2024-11-27',
                   'title': 'Moana 2',
                   'video': false,
-                  'vote_average': 7.2,
+                  'vote_average': '7.2',
                   'vote_count': 72
                 });
                 Navigator.of(context).pop();

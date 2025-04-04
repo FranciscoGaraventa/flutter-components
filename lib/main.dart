@@ -31,8 +31,8 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Movies',
         home: Scaffold(
-          drawer: MovieDrawer() ,
-          body: MoviesView(),
+          drawer: MovieDrawer(),
+          body: MovieDetails(),
         ),
       ),
     );
