@@ -17,8 +17,7 @@ class MoviesBloc extends IBloc {
   Future<void> loadMovie({required dynamic arguments}) async {
     _moviesController.sink.add(Loading());
     try {
-      var movieJson = jsonDecode(arguments) as Map<String, dynamic>;
-      MovieModel movie = MovieModel.fromJson(movieJson);
+      MovieModel movie = MovieModel.fromJson(arguments);
       _moviesController.sink.add(Success(data: movie));
     } catch (e) {
       _moviesController.sink.add(Failure(error: e.toString()));
